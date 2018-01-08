@@ -3,13 +3,10 @@ var moment = require('moment');
 var lat, lng;
 
 var todaySunInfo = function(){
-    
-    console.log("variables", lat, lng);
-
     return request({
         url: 'https://api.sunrise-sunset.org/json',
-        qs: {"lat": lat, "lng": lng, "date": "today", "formatted": 0},
-        cacheKey: 'https://api.sunrise-sunset.org/json?lat=46.739800&lng=-117.178220&date=today&formatted=0',
+        qs: {"lat": lat, "lng": lng, "date": moment().format("YYYY-MM-DD"), "formatted": 0},
+        cacheKey: 'https://api.sunrise-sunset.org/',
         cacheTTL: 1 * 60 * 60 * 1000
 
       })
@@ -20,8 +17,8 @@ var todaySunInfo = function(){
         sunInfo.sunrise = moment(result.results.sunrise);   
             
         return sunInfo;
-      }).catch(function(){
-          console.log("ERROR!!!");
+      }).catch(function(error){
+          console.log("ERROR!!!", error);
       });
 }
 
