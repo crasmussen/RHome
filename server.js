@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080; 
 
-
 // Configure RHome modules
 const mySun = new Sun('46.739800', '-117.178220');
 const madelineBedtime = '8:00 pm';
