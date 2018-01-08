@@ -70,3 +70,11 @@ app.use('/api', router);
 app.listen(port);
 console.log('listening on port ' + port);
 
+// EVENT LOOP
+// =============================================================================
+
+function intervalFunc() {
+    console.log(madelineRoom.setBrightness());
+  }
+  
+  setInterval(intervalFunc, 15 * 1000);
