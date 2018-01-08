@@ -8,7 +8,7 @@ var bodyParser   = require('body-parser');
 var moment       = require('moment');
 var Sun          = require('./modules/sun.js');
 var MadelineRoom = require('./modules/madelineRoom.js');
-var Bulb         = require('./api/devices/hue.js')
+var Bulb         = require('./api/devices/hueBulb.js')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -17,9 +17,8 @@ var port = process.env.PORT || 8080;
 
 // Configure RHome modules
 const mySun = new Sun('46.739800', '-117.178220');
-const madelineBedtime = '8:00 pm';
-const myMadelineRoom = new MadelineRoom(madelineBedtime);
-const myBulb = new Bulb("192.168.1.80", 1, "JpqdoM80YYtRhrx7VJomiNFL6GteO1UBRs93p9GC");
+const madelineBulb = new Bulb("192.168.1.80", 1, "JpqdoM80YYtRhrx7VJomiNFL6GteO1UBRs93p9GC");
+const madelineRoom = new MadelineRoom(madelineBulb);
 
 // ROUTES
 // =============================================================================
@@ -37,8 +36,18 @@ router.get('/sunrise', function(req, res) {
     })
 });
 
-router.get('/madelineBedtime', function(req, res) {
-    res.json({message: myMadelineRoom.minutesUntilBedtime()});
+router.get('/getBrightness', function(req, res) {
+    if (req.query.time !== undefined){
+        var overrideTime = moment(req.query.time);
+    }
+    res.json({message: madelineRoom.getBrightness(overrideTime)});
+});
+
+router.post('/updateBrightness', function(req, res) {
+    if (req.query.time !== undefined){
+        var overrideTime = moment(req.query.time);
+    }
+    res.json({message: madelineRoom.setBrightness(overrideTime)});
 });
 
 router.get('/on', function(req, res) {

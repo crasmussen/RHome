@@ -1,7 +1,9 @@
 var request = require('request-promise');
 var moment = require('moment');
 var _ipAddress, _lightId, _key;
-//JpqdoM80YYtRhrx7VJomiNFL6GteO1UBRs93p9GC
+
+
+
 var sendToHue = function(parameters){
     
     return request({
@@ -30,5 +32,13 @@ module.exports = class Bulb {
 
     turnOff(){
         sendToHue({"on":false});  
+    }
+
+    setBrightness(brightnessValue){
+        if(brightnessValue > 0){
+            sendToHue({"on": true, "bri": brightnessValue});
+        } else{
+            sendToHue({"on": false, "bri": 0});
+        }
     }
 };
