@@ -77,4 +77,4 @@ function intervalFunc() {
     console.log(madelineRoom.setBrightness());
   }
   
-  setInterval(intervalFunc, 15 * 1000);
+  setInterval(intervalFunc, 10 * 1000);
