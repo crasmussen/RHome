@@ -1,23 +1,19 @@
-// server.js
-
-// BASE SETUP
+// SERVER SETUP
 // =============================================================================
 
-// call the packages we need
-var express      = require('express');        // call express
-var app          = express();                 // define our app using express
+// register packages
+var express      = require('express');
+var app          = express();   
 var bodyParser   = require('body-parser');
 var moment       = require('moment');
 var Sun          = require('./modules/sun.js');
 var MadelineRoom = require('./modules/madelineRoom.js');
 var Bulb         = require('./api/devices/hue.js')
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 8080; 
 
 
 // Configure RHome modules
@@ -26,9 +22,9 @@ const madelineBedtime = '8:00 pm';
 const myMadelineRoom = new MadelineRoom(madelineBedtime);
 const myBulb = new Bulb("192.168.1.80", 1, "JpqdoM80YYtRhrx7VJomiNFL6GteO1UBRs93p9GC");
 
-// ROUTES FOR OUR API
+// ROUTES
 // =============================================================================
-var router = express.Router();              // get an instance of the express Router
+var router = express.Router();
 
 router.get('/sunset', function(req, res) {
     mySun.minutesUntilSunset().then(function(minutes){
@@ -57,10 +53,8 @@ router.get('/off', function(req, res) {
 });
 
 
-// more routes for our API will happen here
-
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
+// REGISTER ROUTES
+// =============================================================================
 app.use('/api', router);
 
 // START THE SERVER
