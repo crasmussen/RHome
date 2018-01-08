@@ -1,11 +1,11 @@
 var request = require('request-promise-cache');
 var moment = require('moment');
-var lat, lng;
+var _latitude, _longitude;
 
 var todaySunInfo = function(){
     return request({
         url: 'https://api.sunrise-sunset.org/json',
-        qs: {"lat": lat, "lng": lng, "date": moment().format("YYYY-MM-DD"), "formatted": 0},
+        qs: {"lat": _latitude, "lng": _longitude, "date": moment().format("YYYY-MM-DD"), "formatted": 0},
         cacheKey: 'https://api.sunrise-sunset.org/',
         cacheTTL: 1 * 60 * 60 * 1000
 
@@ -23,10 +23,9 @@ var todaySunInfo = function(){
 }
 
 module.exports = class Sun {
-    constructor(latt, lngg){
-        lat = latt;
-        lng = lngg;
-        this.count = 0;
+    constructor(latitude, longitude){
+        _latitude = latitude;
+        _longitude = longitude;
     }
 
     minutesUntilSunset(){
