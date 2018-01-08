@@ -17,7 +17,7 @@ var port = process.env.PORT || 8080;
 
 // Configure RHome modules
 const mySun = new Sun('46.739800', '-117.178220');
-const madelineBulb = new Bulb("192.168.1.80", 1, "JpqdoM80YYtRhrx7VJomiNFL6GteO1UBRs93p9GC");
+const madelineBulb = new Bulb("192.168.1.80", 3, "JpqdoM80YYtRhrx7VJomiNFL6GteO1UBRs93p9GC");
 const madelineRoom = new MadelineRoom(madelineBulb);
 
 // ROUTES
@@ -51,12 +51,12 @@ router.post('/updateBrightness', function(req, res) {
 });
 
 router.get('/on', function(req, res) {
-    myBulb.turnOn();
+    madelineBulb.turnOn();
     res.json();
 });
 
 router.get('/off', function(req, res) {
-    myBulb.turnOff();
+    madelineBulb.turnOff();
     res.json();    
 });
 

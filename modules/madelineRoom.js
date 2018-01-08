@@ -4,15 +4,15 @@ var moment = require('moment');
 var _bulb;
 
 var _fadeOutStart = function() {
-        return moment("7:30 pm", "h:mm a");
+        return moment("8:00 pm", "h:mm a");
     };
 
 var _fadeOutFinish = function(){
-    return moment("8:00 pm", "h:mm a");
+    return moment("8:45 pm", "h:mm a");
 };
 
 var _lastExtension = function() {
-    return moment("8:30 pm", "h:mm a");
+    return moment("9:00 pm", "h:mm a");
 }
 
 var brightness = function(currentTime){
